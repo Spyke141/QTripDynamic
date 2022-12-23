@@ -30,9 +30,10 @@ function addCityToDOM(id, city, description, image) {
   // TODO: MODULE_CITIES
   // 1. Populate the City details and insert those details into the DOM
   let divElement = document.createElement("div");
+  divElement.id= id;
   divElement.className="col-sm-6 col-lg-3 mb-4";
   divElement.innerHTML = `
-      <a href="pages/adventures/">
+      <a href="pages/adventures/?city=${id}">
         <div class="tile">
           <img src="${image}" />
           <div class="tile-text text-center">
@@ -44,7 +45,6 @@ function addCityToDOM(id, city, description, image) {
     </div>`
 
         document.getElementById("data").append(divElement);
-
 }
 
 export { init, fetchCities, addCityToDOM };
