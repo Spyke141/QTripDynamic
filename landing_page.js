@@ -21,7 +21,7 @@ async function fetchCities() {
     return data;
   }
   catch(err){
-    throw new Error(err);
+    catch{return null};
   }
 }
 
