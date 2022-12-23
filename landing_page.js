@@ -14,12 +14,14 @@ async function init() {
 async function fetchCities() {
   // TODO: MODULE_CITIES
   // 1. Fetch cities using the Backend API and return the data
-  try {
-    const res = await fetch(`${config.backendEndpoint}`);
+  try{
+    const res = await fetch(`${config.backendEndpoint + `/cities`}`);
     const data = await res.json();
     //  console.log(data);
     return data;
-  } catch {
+  }
+  catch(err){
+    // throw new Error(err);
     return null;
   }
 }
