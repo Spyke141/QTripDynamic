@@ -3,7 +3,7 @@ import config from "../conf/index.js";
 async function init() {
   //Fetches list of all cities along with their images and description
   let cities = await fetchCities();
-
+  //console.log(“From init()”)
   //Updates the DOM with the cities
   cities.forEach((key) => {
     addCityToDOM(key.id, key.city, key.description, key.image);
@@ -29,15 +29,22 @@ async function fetchCities() {
 function addCityToDOM(id, city, description, image) {
   // TODO: MODULE_CITIES
   // 1. Populate the City details and insert those details into the DOM
-  let target = document.getElementById("data");
-  let newDivElement = document.createElement("div");
-  newDivElement.className="col-sm-6 col-lg-3 mb-4 tile";
-  let divEleText = document.createElement("div");
-  divEleText.className="tile-text text-center";
-  
-  newDivElement.innerHTML=`<a href="pages/adventures/?city=${id}"><p>${city}</p><img src="${image}" class = "img-responsive" alt="imageTag">
-  `
-  target.appendChild(newDivElement);
+  let divElement = document.createElement("div");
+  divElement.className="col-sm-6 col-lg-3 mb-4";
+  divElement.innerHTML = `
+      <a href="pages/adventures/">
+        <div class="tile">
+          <img src="${image}" />
+          <div class="tile-text text-center">
+            <h5>${city}</h5>
+            <p>${description}</p>
+          </div>
+        </div></a
+      >
+    </div>`
+
+        document.getElementById("data").append(divElement);
+
 }
 
 export { init, fetchCities, addCityToDOM };
