@@ -15,7 +15,7 @@ async function fetchReservations() {
 
 
   // Place holder for functionality to work in the Stubs
-  return null;
+  
 }
 
 //Function to add reservations to the table. Also; in case of no reservations, display the no-reservation-banner, else hide it.
@@ -30,30 +30,35 @@ function addReservationToTable(reservations) {
     document.getElementById("reservation-table-parent").style.display = "none";
   }
 
-  reservations.map((reservation, idx) => {
-    let tr = document.createElement("tr");
-    tr.innerHTML = `
-          <th scope="row" >${reservation.id}</th>
+  reservations.forEach((reservation, reservationIdx) => {
+    let ele = document.createElement("tr");
+    
+    const date = new Date(reservation.date).toLocaleDateString("en-IN");
+    const time = new Date(reservation.time).toLocaleString("en-IN",{
+    year: "numeric",
+    day: "numeric",
+    month: "long",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: true
+  });
+    let updatedTime=time.split("at")[0].trim()+", "+time.split("at")[1].trim();
+    ele.innerHTML = `
+          <td>${reservation.id}</td>
           <td>${reservation.name}</td>
           <td>${reservation.adventureName}</td>
           <td>${reservation.person}</td>
-          <td>${new Date(reservation.date).toLocaleDateString("en-IN")}</td>
-           <td>${reservation.price}</td>
-           <td>${new Date(reservation.time).toLocaleString("en-IN", {
-             year: "numeric",
-             day: "numeric",
-             month: "long",
-             hour: "numeric",
-             minute: "numeric",
-             second: "numeric",
-             hour12: true,
+          <td>${date}</td>
+          <td>${reservation.price}</td>
+          <td>${updatedTime}</td>
            })}</td>
            <td><div class="reservation-visit-button" id=${
              reservation.id
            }><a href="../detail/?adventure=${
       reservation.adventure
     }">Visit Adventure</a></div></td>`;
-    document.getElementById("reservation-table").appendChild(tr);
+    document.getElementById("reservation-table").appendChild(ele);
   });
 
   //Conditionally render the no-reservation-banner and reservation-table-parent
