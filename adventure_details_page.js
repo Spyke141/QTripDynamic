@@ -132,17 +132,17 @@ function captureFormSubmit(adventure) {
     let formData = {
       adventure: adventure.id,
       name: e.target.name.value,
-      date: e.target.date.value,
-      person: e.target.person.value
-  };
-  console.log("formData", formData);
+      date: e.target.date,
+      person: e.target.person,
+  }
 
+  console.log("formData", formData);
   let response = await fetch(config.backendEndpoint + '/reservations/new', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(formData),
+    body: JSON.stringify(formData)
   });
   let result = await response.json();
   if(result.success) alert('Success1!');
