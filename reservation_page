@@ -30,35 +30,34 @@ function addReservationToTable(reservations) {
     document.getElementById("reservation-table-parent").style.display = "none";
   }
 
-  reservations.forEach((reservation, reservationIdx) => {
-    let ele = document.createElement("tr");
-    
+  reservations.map((reservation, idx) => {
+    let tr = document.createElement("tr");
     const date = new Date(reservation.date).toLocaleDateString("en-IN");
-    const time = new Date(reservation.time).toLocaleString("en-IN",{
-    year: "numeric",
-    day: "numeric",
-    month: "long",
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-    hour12: true
-  });
-    let updatedTime=time.split("at")[0].trim()+", "+time.split("at")[1].trim();
-    ele.innerHTML = `
-          <td>${reservation.id}</td>
+    const time = new Date(reservation.time).toLocaleString("en-IN", {
+      year: "numeric",
+      day: "numeric",
+      month: "long",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      hour12: true,
+    });
+    const updatetime = time.replace(" at",",");
+
+    tr.innerHTML = `
+          <th scope="row" >${reservation.id}</th>
           <td>${reservation.name}</td>
           <td>${reservation.adventureName}</td>
           <td>${reservation.person}</td>
           <td>${date}</td>
-          <td>${reservation.price}</td>
-          <td>${updatedTime}</td>
-           })}</td>
+           <td>${reservation.price}</td>
+           <td>${updatetime}</td>
            <td><div class="reservation-visit-button" id=${
              reservation.id
            }><a href="../detail/?adventure=${
       reservation.adventure
     }">Visit Adventure</a></div></td>`;
-    document.getElementById("reservation-table").appendChild(ele);
+    document.getElementById("reservation-table").appendChild(tr);
   });
 
   //Conditionally render the no-reservation-banner and reservation-table-parent
