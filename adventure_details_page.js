@@ -130,10 +130,14 @@ function captureFormSubmit(adventure) {
   document.getElementById('myForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     let formData = {
+      // adventure: adventure.id,
+      // name: e.target.name.value,
+      // date: e.target.date,
+      // person: e.target.person,
       adventure: adventure.id,
-      name: e.target.name.value,
-      date: e.target.date,
-      person: e.target.person,
+      name: `${e.target.name.value}`,
+      date: `${e.target.date}`,
+      person: `${e.target.person}`
   }
 
   console.log("formData", formData);
